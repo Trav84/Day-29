@@ -3,11 +3,12 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 
 	$scope.stateList = [];
 	$scope.changeArray = [];
-	$scope.abb = true;
-	$scope.alpha = true;
+	$scope.abb = false;
+	$scope.alpha = false;
 	$scope.filterBy = '';
 	$scope.stateArrow = true;
 	$scope.abbArrow = true;
+	$scope.border = null;
 
 	function getRequest() {
 
@@ -34,14 +35,15 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 	$scope.stateClick = function() {
 		if($scope.alpha) {
 			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-				$scope.alpha = true;
+				$scope.alpha = false;
 				return element.name + element.abbreviation;
 			});
 		} else {
 			$scope.changeArray.reverse();
-			$scope.alpha = false;
+			$scope.alpha = true;
 		}
 		$scope.stateArrow = !$scope.stateArrow;
+		$
 
 	};
 
@@ -60,7 +62,8 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 
 	$scope.$watch('filterBy', function() {
 		$scope.changeArray = _.filter($scope.stateList, function(element) {
-			return element.name.indexOf($scope.filterBy) >= 0 ||  element.abbreviation.indexOf($scope.filterBy) >= 0;
+			return element.name.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0 || 
+			element.abbreviation.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0;
 		});
 	});
 });

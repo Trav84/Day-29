@@ -31,7 +31,7 @@
 	</div>
 	<table>
 		<tr>
-			<th ng-click="stateClick()"> State <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
+			<th ng-class="{ state: sBorder, abb: aBorder, link: lBorder }" ng-click="stateClick()"> State <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
 			<th ng-click="abbClick()"> Abbreviation <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
 			<th> Link </th>
 		</tr>
