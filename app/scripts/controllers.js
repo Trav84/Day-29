@@ -1,9 +1,9 @@
-angular.module('app.controllers', []).controller('sortController', function($scope, $http, $watch) {
+angular.module('app.controllers', []).controller('sortController', function($scope, $http) {
 	'use strict';
 
 	$scope.stateList = [];
 	$scope.changeArray = [];
-	$scope.alpa = true;
+	$scope.abb = true;
 	$scope.filterBy = '';
 
 	function getRequest() {
@@ -18,7 +18,9 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 					$scope.stateList.push(response[i]);
 				}
 			}
-			$scope.changeArray = $scope.stateList.reverse();
+			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+				return element.name + element.abbreviation;
+			});
 		})
 		.error(function(err) {
 			console.log(err);
@@ -27,16 +29,28 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 	getRequest();
 
 	$scope.stateClick = function() {
-
 		$scope.changeArray.reverse();
-		
-		console.log($scope.changeArray);
-		console.log('click');
-	}
+	};
+
+	$scope.abbClick = function() {
+		if($scope.abb) {
+			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+				$scope.abb = false;
+				return element.abbreviation + element.name;
+			});
+		} else {
+			$scope.changeArray.reverse();
+			$scope.abb = true;
+		}
+	};
 
 	$scope.$watch('filterBy', function() {
-		$scope.changeArray = _.filter($scope.stateList, function() {
-			return element.name.indexOf($scope.filterBy) < 0;
+		$scope.changeArray.name
+		$scope.changeArray = _.filter($scope.stateList, function(element) {
+			return element.name.indexOf($scope.filterBy) >= 0;
 		});
+		// $scope.changeArray = _.filter($scope.stateList, function(element) {
+		// 	return element.abbreviation.indexOf($scope.filterBy) >= 0;
+		// });
 	});
 });

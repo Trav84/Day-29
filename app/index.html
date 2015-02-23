@@ -24,13 +24,15 @@
 	<!--[if lt IE 10]>
 	  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-	<span> States </span>
-	<input type="text" placeholder="Filter" ng-model="filterBy">
+	<div class="header">
+		<span class="states"> States </span>
+		<input type="text" placeholder="Filter" ng-model="filterBy">
+	</div>
 	<table>
 		<tr>
 			<th ng-click="stateClick()"> State </th>
-			<th ng-click="stateClick()"> Abbreviation </th>
-			<th ng-click="linkClick()"> Link </th>
+			<th ng-click="abbClick()"> Abbreviation </th>
+			<th> Link </th>
 		</tr>
 		<tr ng-repeat='state in changeArray'>
 			<td> {{ state.name }} </td>
