@@ -14,6 +14,7 @@
 
 	<!-- build:css styles/main.css -->
 	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<!-- endbuild -->
 
 	<!-- build:js scripts/vendor/modernizr.js -->
@@ -30,8 +31,8 @@
 	</div>
 	<table>
 		<tr>
-			<th ng-click="stateClick()"> State </th>
-			<th ng-click="abbClick()"> Abbreviation </th>
+			<th ng-click="stateClick()"> State <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
+			<th ng-click="abbClick()"> Abbreviation <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
 			<th> Link </th>
 		</tr>
 		<tr ng-repeat='state in changeArray'>
