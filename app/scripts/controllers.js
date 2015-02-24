@@ -25,7 +25,7 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 			// 	}
 			// }
 			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-				return element.title;
+				return element.title.toLowerCase();
 			});
 		})
 		.error(function(err) {
@@ -35,16 +35,23 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 	getRequest();
 
 	$scope.$watch('filterBy', function() {
-		$scope.changeArray = _.filter($scope.stateList, function(element) {
-			return element.title.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0; //|| 
-			//element.abbreviation.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0;
+		if($scope.filterBy === '') {
+			$scope.changeArray = _.filter($scope.stateList, function(element) {
+			return element.title.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0;  
 		});
+		}
+		else {
+			$scope.changeArray = _.filter($scope.stateList, function(element) {
+				return element.title.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0; //|| 
+				//element.abbreviation.toLowerCase().indexOf($scope.filterBy.toLowerCase()) >= 0;
+			});
+		}
 	});
 
 	$scope.click = function(clicked) {
 		if(clicked === 'title') {
 			if($scope.alpha) {
-			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
 				$scope.alpha = false;
 				return element.title;
 			});
@@ -53,26 +60,10 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 			$scope.alpha = true;
 		}
 		$scope.stateArrow = !$scope.stateArrow;
-		}
-
-	};
-
-	$scope.stateClick = function() {
-		if($scope.alpha) {
-			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-				$scope.alpha = false;
-				return element.title;
-			});
-		} else {
-			$scope.changeArray.reverse();
-			$scope.alpha = true;
-		}
-		$scope.stateArrow = !$scope.stateArrow;
-	};
-
-	$scope.abbClick = function() {
-		if($scope.abb) {
-			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+		} 
+		else if (clicked === 'fav') {
+			if($scope.abb) {
+			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
 				$scope.abb = false;
 				return element.num_favorers;
 			});
@@ -81,11 +72,10 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 			$scope.abb = true;
 		}
 		$scope.abbArrow = !$scope.abbArrow;
-	};
-
-	$scope.qntyClick = function() {
-		if($scope.qnty) {
-			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+		}
+		else if (clicked === 'qnty') {
+			if($scope.qnty) {
+			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
 				$scope.qnty = false;
 				return element.quantity;
 			});
@@ -94,4 +84,43 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 			$scope.qnty = true;
 		}
 	}
+	};
+
+	// $scope.stateClick = function() {
+	// 	if($scope.alpha) {
+	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+	// 			$scope.alpha = false;
+	// 			return element.title;
+	// 		});
+	// 	} else {
+	// 		$scope.changeArray.reverse();
+	// 		$scope.alpha = true;
+	// 	}
+	// 	$scope.stateArrow = !$scope.stateArrow;
+	// };
+
+	// $scope.abbClick = function() {
+	// 	if($scope.abb) {
+	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+	// 			$scope.abb = false;
+	// 			return element.num_favorers;
+	// 		});
+	// 	} else {
+	// 		$scope.changeArray.reverse();
+	// 		$scope.abb = true;
+	// 	}
+	// 	$scope.abbArrow = !$scope.abbArrow;
+	// };
+
+	// $scope.qntyClick = function() {
+	// 	if($scope.qnty) {
+	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
+	// 			$scope.qnty = false;
+	// 			return element.quantity;
+	// 		});
+	// 	} else {
+	// 		$scope.changeArray.reverse();
+	// 		$scope.qnty = true;
+	// 	}
+	// }
 });

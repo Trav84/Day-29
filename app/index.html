@@ -43,8 +43,8 @@
 
 		<tr>
 			<th ng-click="click('title')"> Title  <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
-			<th ng-click="click(fav)"> Favorites <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
-			<th ng-click="click(qnty)"> Quanity </th>
+			<th ng-click="click('fav')"> Favorites <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
+			<th ng-click="click('qnty')"> Quanity </th>
 			<th> Etsy Link </th>
 		</tr>
 		<tr ng-repeat='state in changeArray'>
