@@ -30,7 +30,7 @@
 		<input type="text" placeholder="Filter" ng-model="filterBy">
 	</div>
 	<table>
-		<tr>
+		<!-- <tr>
 			<th ng-class="{ state: sBorder, abb: aBorder, link: lBorder }" ng-click="stateClick()"> State <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
 			<th ng-click="abbClick()"> Abbreviation <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
 			<th> Link </th>
@@ -39,6 +39,19 @@
 			<td> {{ state.name }} </td>
 			<td> {{ state.abbreviation }} </td>
 			<td> <a ng-href="https://en.wikipedia.org/wiki/{{ state.name }}"> {{state.name}}</a> </td>
+		</tr> -->
+
+		<tr>
+			<th ng-click="click('title')"> Title  <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
+			<th ng-click="click(fav)"> Favorites <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
+			<th ng-click="click(qnty)"> Quanity </th>
+			<th> Etsy Link </th>
+		</tr>
+		<tr ng-repeat='state in changeArray'>
+			<td> {{ state.title }} </td>
+			<td> {{ state.num_favorers }} </td>
+			<td> {{ state.quantity }} </td>
+			<td> <a ng-href="{{ state.url }}"> Link </a> </td>
 		</tr>
 	</table>
 
