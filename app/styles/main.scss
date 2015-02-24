@@ -4,6 +4,10 @@ span {
 	margin:1em 1em;
 }
 
+body {
+	margin:1em 1em;
+}
+
 .header {
 	background-color: rgb(220,230,234);
 }
@@ -46,4 +50,15 @@ table {
 
 .bigBorder {
 	border-bottom:3px solid black;
+}
+
+.big {
+	width:60%;
+}
+
+.little {
+	width:10%;
+}
+.centered{
+	text-align: center;
 }

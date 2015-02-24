@@ -7,6 +7,7 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 	$scope.filterBy = '';
 	$scope.stateArrow = true;
 	$scope.abbArrow = true;
+	$scope.qntyArrow = true;
 
 	function getRequest() {
 
@@ -15,7 +16,6 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 
 			$scope.stateList = [];
 			$scope.stateList = response.results;
-			$scope.stateList.push({ title: 'hello im a test case'});
 			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
 				return element.title.toLowerCase();
 			});
@@ -23,7 +23,6 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 		.error(function(err) {
 			console.log(err);
 		});
-
 	}
 
 	getRequest();
@@ -51,14 +50,12 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 				else {
 					return element[clicked];
 				}
-				
 			});
 		} 
 		else {
 			$scope.changeArray.reverse();
 			$scope.sort = true;
 		}
-
 		$scope.stateArrow = !$scope.stateArrow;
 	}
 });
