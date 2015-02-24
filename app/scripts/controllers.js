@@ -3,30 +3,29 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 
 	$scope.stateList = [];
 	$scope.changeArray = [];
-	$scope.abb = true;
-	$scope.alpha = true;
-	$scope.qnty = true;
+	$scope.sort = false;
 	$scope.filterBy = '';
 	$scope.stateArrow = true;
 	$scope.abbArrow = true;
-	$scope.border = null;
 
 	function getRequest() {
 
-		//$http.get('http://tiny-pizza-server.herokuapp.com/collections/fancy-table')
 		$http.get('https://openapi.etsy.com/v2/listings/active?api_key=ypps3d905d69sq5j70eknf2t')
 		.success(function(response) {
 
 			$scope.stateList = [];
 			$scope.stateList = response.results;
+			$scope.stateList.push({ title: 'hello im a test case'});
 			$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-				return element.title;
+				return element.title.toLowerCase();
 			});
 		})
 		.error(function(err) {
 			console.log(err);
 		});
+
 	}
+
 	getRequest();
 
 	$scope.$watch('filterBy', function() {
@@ -43,78 +42,23 @@ angular.module('app.controllers', []).controller('sortController', function($sco
 	});
 
 	$scope.click = function(clicked) {
-		if(clicked === 'title') {
-			if($scope.alpha) {
+		if($scope.sort) {
 			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
-				$scope.alpha = false;
-				return element.title;
+				$scope.sort = false;
+				if(clicked === 'title') {
+					return element[clicked].toLowerCase();
+				} 
+				else {
+					return element[clicked];
+				}
+				
 			});
-		} else {
-			$scope.changeArray.reverse();
-			$scope.alpha = true;
-		}
-		$scope.stateArrow = !$scope.stateArrow;
 		} 
-		else if (clicked === 'fav') {
-			if($scope.abb) {
-			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
-				$scope.abb = false;
-				return element.num_favorers;
-			});
-		} else {
+		else {
 			$scope.changeArray.reverse();
-			$scope.abb = true;
+			$scope.sort = true;
 		}
-		$scope.abbArrow = !$scope.abbArrow;
-		}
-		else if (clicked === 'qnty') {
-			if($scope.qnty) {
-			$scope.changeArray = _.sortBy($scope.changeArray, function(element) {
-				$scope.qnty = false;
-				return element.quantity;
-			});
-		} else {
-			$scope.changeArray.reverse();
-			$scope.qnty = true;
-		}
+
+		$scope.stateArrow = !$scope.stateArrow;
 	}
-	};
-
-	// $scope.stateClick = function() {
-	// 	if($scope.alpha) {
-	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-	// 			$scope.alpha = false;
-	// 			return element.title;
-	// 		});
-	// 	} else {
-	// 		$scope.changeArray.reverse();
-	// 		$scope.alpha = true;
-	// 	}
-	// 	$scope.stateArrow = !$scope.stateArrow;
-	// };
-
-	// $scope.abbClick = function() {
-	// 	if($scope.abb) {
-	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-	// 			$scope.abb = false;
-	// 			return element.num_favorers;
-	// 		});
-	// 	} else {
-	// 		$scope.changeArray.reverse();
-	// 		$scope.abb = true;
-	// 	}
-	// 	$scope.abbArrow = !$scope.abbArrow;
-	// };
-
-	// $scope.qntyClick = function() {
-	// 	if($scope.qnty) {
-	// 		$scope.changeArray = _.sortBy($scope.stateList, function(element) {
-	// 			$scope.qnty = false;
-	// 			return element.quantity;
-	// 		});
-	// 	} else {
-	// 		$scope.changeArray.reverse();
-	// 		$scope.qnty = true;
-	// 	}
-	// }
 });

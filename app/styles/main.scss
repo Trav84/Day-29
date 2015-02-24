@@ -17,13 +17,31 @@ input {
 }
 
 table {
-	margin:1em 1em;
 	padding:1em 1em;
 
 	th {
 		border-bottom:1px solid black;
 	}
 
+}
+
+.row {
+	padding:0.4em 0;
+	background-color:lightgrey;
+}
+
+.title {
+	background-color: rgb(202,222,230);
+	padding: 0.4em 0;
+	width:100%;
+}
+
+.even {
+	background-color: rgb(229,236,242);
+}
+
+.odd {
+	background-color: rgb(245,248,253);
 }
 
 .bigBorder {

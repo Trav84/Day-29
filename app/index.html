@@ -42,16 +42,16 @@
 		</tr> -->
 
 		<tr>
-			<th ng-click="click('title')"> Title  <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
-			<th ng-click="click('fav')"> Favorites <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
-			<th ng-click="click('qnty')"> Quanity </th>
-			<th> Etsy Link </th>
+			<th class="title" ng-click="click('title')"> Title  <i ng-show="stateArrow" class="fa fa-caret-up"> </i> <i ng-hide="stateArrow" class="fa fa-caret-down"></i></th>
+			<th class="title" ng-click="click('num_favorers')"> Favorites <i ng-show="abbArrow" class="fa fa-caret-up"> </i> <i ng-hide="abbArrow" class="fa fa-caret-down"></i></th>
+			<th class="title" ng-click="click('quantity')"> Quanity </th>
+			<th class="title"> Etsy Link </th>
 		</tr>
 		<tr ng-repeat='state in changeArray'>
-			<td> {{ state.title }} </td>
-			<td> {{ state.num_favorers }} </td>
-			<td> {{ state.quantity }} </td>
-			<td> <a ng-href="{{ state.url }}"> Link </a> </td>
+			<td ng-class-odd="'odd'" ng-class-even="'even'" class="row"> {{ state.title }} </td>
+			<td ng-class-odd="'odd'" ng-class-even="'even'" class="row"> {{ state.num_favorers }} </td>
+			<td ng-class-odd="'odd'" ng-class-even="'even'" class="row"> {{ state.quantity }} </td>
+			<td ng-class-odd="'odd'" ng-class-even="'even'" class="row"> <a ng-href="{{ state.url }}"> Link </a> </td>
 		</tr>
 	</table>
 
